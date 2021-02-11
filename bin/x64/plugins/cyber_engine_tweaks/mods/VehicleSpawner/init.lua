@@ -11,13 +11,14 @@
 --     \__\/         \__\/         \__\/         \__\/                                 \__\/         \__\/                 
 -------------------------------------------------------------------------------------------------------------------------------
 -- This mod was created by Architect from CP2077 Modding Tools Discord. 
+-- https://github.com/specik/CP2077-Vehicle-Unlocker-Mod
 --
 -- You are free to use this mod as long as you follow the following license guidelines:
 --    * It may not be uploaded to any other site without my express permission.
 --    * Using any code contained herein in another mod requires full credits.
 --    * You may not fork this code and make your own competing version of this mod available for download.
 --
--- Full license available at https://github.com/specik/CP2077-CityHack-Mod/blob/main/LICENSE.md
+-- Full license available at https://github.com/specik/CP2077-Vehicle-Unlocker-Mod/blob/main/LICENSE
 -------------------------------------------------------------------------------------------------------------------------------
 
 local VehicleSpawner = { 
