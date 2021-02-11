@@ -28,10 +28,10 @@ The mod window will appear by default when opening the CET console. If you'd lik
 
 ## Credits
 
-[Yamashi](https://github.com/yamashi) - For developing CET and for stealing non GDPR compliant data via CET telemetry.
-[WhySoSerious](https://github.com/WSSDude420) - For helping develop CET.
-[NonameNonumber](https://www.nexusmods.com/cyberpunk2077/users/108159138) - For helping with the search filtering code
-[Catmino](https://www.nexusmods.com/cyberpunk2077/users/102562218) - For providing fresh dump of TweakDB vehicles
-[McUsher1](https://www.nexusmods.com/cyberpunk2077/users/106728513) - For his Call for Help mod that helped me figure out the spawn system
-[Ming](https://www.nexusmods.com/cyberpunk2077/users/106335388) - For their theming code/helpers and stealing my magazine
-[CP77 Modding Tools Discord](https://discord.gg/cFZv8F3p) - For being an awesome, wholesome and helpful community.
+- [Yamashi](https://github.com/yamashi) - For developing CET and for stealing non GDPR compliant data via CET telemetry.
+- [WhySoSerious](https://github.com/WSSDude420) - For helping develop CET.
+- [NonameNonumber](https://www.nexusmods.com/cyberpunk2077/users/108159138) - For helping with the search filtering code
+- [Catmino](https://www.nexusmods.com/cyberpunk2077/users/102562218) - For providing fresh dump of TweakDB vehicles
+- [McUsher1](https://www.nexusmods.com/cyberpunk2077/users/106728513) - For his Call for Help mod that helped me figure out the spawn system
+- [Ming](https://www.nexusmods.com/cyberpunk2077/users/106335388) - For their theming code/helpers and stealing my magazine
+- [CP77 Modding Tools Discord](https://discord.gg/cFZv8F3p) - For being an awesome, wholesome and helpful community.
