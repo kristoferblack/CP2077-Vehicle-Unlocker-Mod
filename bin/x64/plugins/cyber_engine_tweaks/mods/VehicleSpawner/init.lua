@@ -25,6 +25,7 @@ local VehicleSpawner = {
     description = "",
     drawWindow = false,
 
+    Spawner = require "spawner",
     UI = require "ui/ui"
 }
 
@@ -45,7 +46,7 @@ function VehicleSpawner:new()
     end)
       
     registerForEvent("onUpdate", function(deltaTime)
-
+        VehicleSpawner.Spawner.Monitor(deltaTime)
     end)
 
     registerForEvent("onOverlayOpen", function()

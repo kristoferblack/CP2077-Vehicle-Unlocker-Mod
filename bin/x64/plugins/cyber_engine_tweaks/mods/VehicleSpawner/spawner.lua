@@ -1,12 +1,32 @@
 local VehicleSpawnerCore = {
+    DeltaTime = 0,
     SpawnDistance = 10,
+
+    Util = require "util",
 
     ValidVehicleTypes = {
         "vehicleCarBaseObject",
+        "vehicleTankBaseObject",
         "vehicleBikeBaseObject",
         "vehicleAVBaseObject"
     }
 }
+
+function VehicleSpawnerCore.Monitor(deltaTime)
+    VehicleSpawnerCore.DeltaTime = VehicleSpawnerCore.DeltaTime + deltaTime
+
+    if VehicleSpawnerCore.DeltaTime > 1 then
+        local player = Game.GetPlayer()
+        local vehicle = Game.GetTargetingSystem():GetLookAtObject(player, false, false)
+        local vehiclePS = vehicle:GetVehiclePS()
+        
+        if vehiclePS:GetDoorInteractionState(1).value ~= "Available" then
+            vehiclePS:UnlockAllVehDoors()
+        end
+
+        VehicleSpawnerCore.DeltaTime = VehicleSpawnerCore.DeltaTime - 1
+    end
+end
 
 function VehicleSpawnerCore.Spawn(id)
     if not id then return end
@@ -18,23 +38,39 @@ function VehicleSpawnerCore.Spawn(id)
 	local spawnTransform = player:GetWorldTransform()
 	local spawnPosition = spawnTransform.Position:ToVector4(spawnTransform.Position)
 
-	spawnTransform:SetPosition(spawnTransform, Vector4.new(spawnPosition.x + offset.x, spawnPosition.y + offset.y, spawnPosition.z + offset.z, spawnPosition.w))
-
     local vehicleTDBID = TweakDBID.new(id)
 
-	Game.GetPreventionSpawnSystem():RequestSpawn(vehicleTDBID, 1, spawnTransform)
-
-    return true
+	spawnTransform:SetPosition(spawnTransform, Vector4.new(spawnPosition.x + offset.x, spawnPosition.y + offset.y, spawnPosition.z + offset.z, spawnPosition.w))
+	
+    Game.GetPreventionSpawnSystem():RequestSpawn(vehicleTDBID, -1, spawnTransform)
 end
 
 function VehicleSpawnerCore.Despawn()
+
     local player = Game.GetPlayer()
     local target = Game.GetTargetingSystem():GetLookAtObject(player, false, false)
-    local targetTDBID = target:GetEntityID()
 
-    Game.GetPreventionSpawnSystem():RequestDespawn(targetTDBID)
+    if target then
+        if VehicleSpawnerCore.Util.IfArrayHasValue(VehicleSpawnerCore.ValidVehicleTypes, target) then
 
-    player:SetWarningMessage("Look away from vehicle to despawn")
+            local targetTDBID = target:GetEntityID()
+            Game.GetPreventionSpawnSystem():RequestDespawn(targetTDBID)
+            -- target:Dispose()
+        end
+    end
 end
+
+
+function VehicleSpawnerCore.CheckValid()
+    local player = Game.GetPlayer()
+    local target = Game.GetTargetingSystem():GetLookAtObject(player, false, false)
+
+    if VehicleSpawnerCore.Util.IfArrayHasValue(VehicleSpawnerCore.ValidVehicleTypes, target) then
+        return true
+    else
+        return false
+    end
+end
+
 
 return VehicleSpawnerCore

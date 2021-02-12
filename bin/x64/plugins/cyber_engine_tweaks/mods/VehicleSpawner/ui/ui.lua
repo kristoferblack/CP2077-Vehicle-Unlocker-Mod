@@ -59,16 +59,20 @@ function VehicleSpawnerUI.Create()
         end
         ImGui.ListBoxFooter()
 
-        if ImGui.Button("Spawn Vehicle", -1, 25) then
-            VehicleSpawnerUI.Spawner.Spawn(VehicleSpawnerUI.SelectedVehicle)
+        if VehicleSpawnerUI.SelectedVehicle ~= "" then
+            if ImGui.Button("Spawn Vehicle", -1, 25) then
+                VehicleSpawnerUI.Spawner.Spawn(VehicleSpawnerUI.SelectedVehicle)
+            end
         end
 
-        if ImGui.Button("Despawn Vehicle", -1, 25) then
-            VehicleSpawnerUI.Spawner.Despawn()
-        end
+        if VehicleSpawnerUI.Spawner.CheckValid() then
+            if ImGui.Button("Despawn Vehicle", -1, 25) then
+                VehicleSpawnerUI.Spawner.Despawn()
+            end
 
-        if ImGui.IsItemHovered() then
-            ImGui.SetTooltip("Look at vehicle you want to despawn, then click button.")
+            if ImGui.IsItemHovered() then
+                ImGui.SetTooltip("Look at vehicle you want to despawn, then click button.\r\nLook away from vehicle to complete despawn.")
+            end
         end
 
     end

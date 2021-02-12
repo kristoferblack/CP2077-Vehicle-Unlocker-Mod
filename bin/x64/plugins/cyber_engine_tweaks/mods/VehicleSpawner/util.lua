@@ -22,4 +22,20 @@ function VehicleSpawnerUtil.IsA(kind, value)
     return false
 end
 
+function VehicleSpawnerUtil.IfArrayHasValue(items, val)
+    local innerVal = val
+
+    if not val then return end
+
+    if type(val) ~= "string" then innerVal = val:ToString() end
+
+    for index, value in ipairs(items) do
+        if value == innerVal then
+            return true
+        end
+    end
+
+    return false
+end
+
 return VehicleSpawnerUtil
