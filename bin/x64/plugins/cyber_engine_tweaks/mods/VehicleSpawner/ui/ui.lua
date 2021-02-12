@@ -75,28 +75,12 @@ function VehicleSpawnerUI.Create()
             end
         end
 
+        if ImGui.Button("Get Vehicle ID", -1, 25) then
+            print(TweakDB:GetRecord(TweakDBID.new(tostring(VehicleSpawnerUI.SelectedVehicle))):GetID())
+        end
+
         if ImGui.Button("Add Veh List", -1, 25) then
-
-            local vehicles = VehicleSpawnerUI.Data.Read()
-            local vehiclesList = TweakDB:GetFlat(TweakDBID.new("Vehicle.vehicle_list.list"))
-
-            for i=1, #vehiclesList do
-                table.remove(vehiclesList, 1)
-            end
-               
-            TweakDB:Update(vehiclesList)
-
-            for i, vehicle in ipairs(VehicleSpawnerUI.Data.Read()) do
-                table.insert(vehiclesList, TweakDBID.new(tostring(vehicle)))
-            end
-            
-            TweakDB:SetFlat(TweakDBID.new("Vehicle.vehicle_list.list"), vehiclesList)
-            TweakDB:Update(vehiclesList)
-
-
-            for i, veh in ipairs(vehList) do
-                print(i, veh)
-            end
+            VehicleSpawnerUI.Spawner.Populate()
         end
 
         if ImGui.Button("Veh List", -1, 25) then
@@ -108,6 +92,15 @@ function VehicleSpawnerUI.Create()
             end
         end
 
+        if ImGui.Button("Player Veh List", -1, 25) then
+            local vs = Game.GetVehicleSystem()
+
+            for i, veh in ipairs(vs:GetPlayerUnlockedVehicles()) do
+                print(i, veh.name)
+            end
+
+            -- print(i, veh.name .. " - " .. veh.recordID .. " - " .. veh.vehicleType)
+        end
     end
     ImGui.End()
 

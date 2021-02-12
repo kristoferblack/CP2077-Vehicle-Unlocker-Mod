@@ -42,11 +42,11 @@ function VehicleSpawner:new()
     -- START Events --------------------------------------------------------------------------
     
     registerForEvent("onInit", function()
-        VehicleSpawner.Spawner.Populate()
+        -- VehicleSpawner.Spawner.Populate()
     end)
       
     registerForEvent("onUpdate", function(deltaTime)
-        VehicleSpawner.Spawner.Monitor(deltaTime)
+        VehicleSpawner.Spawner.Tick(deltaTime)
     end)
 
     registerForEvent("onOverlayOpen", function()

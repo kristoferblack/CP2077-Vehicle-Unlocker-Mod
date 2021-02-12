@@ -3,6 +3,7 @@ local VehicleSpawnerCore = {
     SpawnDistance = 10,
 
     Util = require "util",
+    Data = require "data",
 
     VehicleSpawnSystemToggled = false,
 
@@ -15,11 +16,20 @@ local VehicleSpawnerCore = {
     }
 }
 
-function VehicleSpawnerCore.Monitor(deltaTime)
+function VehicleSpawnerCore.Tick(deltaTime)
     VehicleSpawnerCore.DeltaTime = VehicleSpawnerCore.DeltaTime + deltaTime
 
     if VehicleSpawnerCore.DeltaTime > 1 then
-        local player = Game.GetPlayer()
+        VehicleSpawnerCore.Monitor()
+
+        VehicleSpawnerCore.DeltaTime = VehicleSpawnerCore.DeltaTime - 1
+    end
+end
+
+function VehicleSpawnerCore.Monitor()
+    local player = Game.GetPlayer()
+
+    if player then
         local vehicle = Game.GetTargetingSystem():GetLookAtObject(player, false, false)
 
         if vehicle then
@@ -37,23 +47,20 @@ function VehicleSpawnerCore.Monitor(deltaTime)
 end
 
 function VehicleSpawnerCore.Populate()
-    local vehicles = VehicleSpawnerUI.Data.Read()
+    local vehicles = VehicleSpawnerCore.Data.Read()
     local vehiclesList = TweakDB:GetFlat(TweakDBID.new("Vehicle.vehicle_list.list"))
 
     for i = 1, #vehiclesList do
         table.remove(vehiclesList, 1)
     end
-       
-    TweakDB:Update(vehiclesList)
 
     for i, vehicle in ipairs(vehicles) do
         table.insert(vehiclesList, TweakDBID.new(tostring(vehicle)))
     end
     
     TweakDB:SetFlat(TweakDBID.new("Vehicle.vehicle_list.list"), vehiclesList)
-    TweakDB:Update(vehiclesList)
 
-    return true
+    TweakDB:Update(TweakDBID.new("Vehicle.vehicle_list.list"))
 end
 
 function VehicleSpawnerCore.Spawn(id)
@@ -61,13 +68,35 @@ function VehicleSpawnerCore.Spawn(id)
 
     local vs = Game.GetVehicleSystem()
 
-    if not VehicleSpawnerCore.VehicleSpawnSystemToggled then
-        vs:ToggleSummonMode()
+    -- if not VehicleSpawnerCore.VehicleSpawnSystemToggled then
+    --     vs:ToggleSummonMode()
 
-        VehicleSpawnerCore.VehicleSpawnSystemToggled = true
-    end
+    --     VehicleSpawnerCore.VehicleSpawnSystemToggled = true
+    -- end
 
-    vs:SpawnPlayerVehicle(TweakDBID.new(id))
+
+    
+    vehObj = NewObject('vehicleGarageVehicleID')
+
+    print(Dump(vehObj, true))
+    -- vehicleID = Game['Cast;TweakDBID;GarageVehicleID']
+    -- vehicleID = vehObj['Resolve;string'](tostring(id))
+    -- print(Dump(vs,false))
+    -- print(GameDump(vehicleID))
+    
+    -- print(Dump(Game['vehicleGarageVehicleID'],false))
+
+    
+    -- vehicleID = vehObj['Resolve'](tostring(id))
+
+    -- vehObj.name = tostring(id)
+    -- vehObj.recordID = TweakDBID.new(id)
+
+    -- print(vehicleID)
+    -- print(Dump(vehObj,false))
+
+    -- vs:TogglePlayerActiveVehicle(vehObj, "Car", false)
+    -- vs:SpawnPlayerVehicle()
 
 	-- local player = Game.GetPlayer()
 	-- local worldForward = player:GetWorldForward()
