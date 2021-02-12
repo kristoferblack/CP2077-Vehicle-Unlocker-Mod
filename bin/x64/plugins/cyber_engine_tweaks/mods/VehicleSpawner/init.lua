@@ -42,7 +42,7 @@ function VehicleSpawner:new()
     -- START Events --------------------------------------------------------------------------
     
     registerForEvent("onInit", function()
-
+        VehicleSpawner.Spawner.Populate()
     end)
       
     registerForEvent("onUpdate", function(deltaTime)

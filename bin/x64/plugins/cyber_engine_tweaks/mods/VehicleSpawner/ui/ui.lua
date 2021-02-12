@@ -75,6 +75,39 @@ function VehicleSpawnerUI.Create()
             end
         end
 
+        if ImGui.Button("Add Veh List", -1, 25) then
+
+            local vehicles = VehicleSpawnerUI.Data.Read()
+            local vehiclesList = TweakDB:GetFlat(TweakDBID.new("Vehicle.vehicle_list.list"))
+
+            for i=1, #vehiclesList do
+                table.remove(vehiclesList, 1)
+            end
+               
+            TweakDB:Update(vehiclesList)
+
+            for i, vehicle in ipairs(VehicleSpawnerUI.Data.Read()) do
+                table.insert(vehiclesList, TweakDBID.new(tostring(vehicle)))
+            end
+            
+            TweakDB:SetFlat(TweakDBID.new("Vehicle.vehicle_list.list"), vehiclesList)
+            TweakDB:Update(vehiclesList)
+
+
+            for i, veh in ipairs(vehList) do
+                print(i, veh)
+            end
+        end
+
+        if ImGui.Button("Veh List", -1, 25) then
+
+            local vehList = TweakDB:GetFlat(TweakDBID.new("Vehicle.vehicle_list.list"))
+
+            for i, veh in ipairs(vehList) do
+                print(i, veh)
+            end
+        end
+
     end
     ImGui.End()
 
