@@ -35,7 +35,7 @@ function VehicleSpawnerUI.Create()
         
         local filterTextEsc = VehicleSpawnerUI.VehicleFilterText:gsub('([^%w])', '%%%1')
 
-        if ImGui.ListBoxHeader("##VehicleList", -1, 200) then
+        if ImGui.BeginListBox("##VehicleList", -1, 200) then
             for i, vehicle in ipairs(VehicleSpawnerUI.Data.Read()) do
 
                 local prettyName = Game.GetLocalizedTextByKey(Game['TDB::GetLocKey;TweakDBID'](TweakDBID.new(vehicle ..'.displayName')))
@@ -58,7 +58,7 @@ function VehicleSpawnerUI.Create()
                 
             end
         end
-        ImGui.ListBoxFooter()
+        ImGui.EndListBox()
 
         if VehicleSpawnerUI.SelectedVehicle ~= "" then
             if ImGui.Button("Spawn Vehicle", -1, 25) then
