@@ -12,19 +12,31 @@ local VehicleSpawnerCore = {
     }
 }
 
-function VehicleSpawnerCore.Monitor(deltaTime)
+function VehicleSpawnerCore.Tick(deltaTime)
     VehicleSpawnerCore.DeltaTime = VehicleSpawnerCore.DeltaTime + deltaTime
 
     if VehicleSpawnerCore.DeltaTime > 1 then
-        local player = Game.GetPlayer()
-        local vehicle = Game.GetTargetingSystem():GetLookAtObject(player, false, false)
-        local vehiclePS = vehicle:GetVehiclePS()
-        
-        if vehiclePS:GetDoorInteractionState(1).value ~= "Available" then
-            vehiclePS:UnlockAllVehDoors()
-        end
+        VehicleSpawnerCore.Monitor()
 
         VehicleSpawnerCore.DeltaTime = VehicleSpawnerCore.DeltaTime - 1
+    end
+
+end
+
+function VehicleSpawnerCore.Monitor()
+    local player = Game.GetPlayer()
+
+    if player then
+        local target = Game.GetTargetingSystem():GetLookAtObject(player, false, false)
+
+        if VehicleSpawnerCore.Util.IfArrayHasValue(VehicleSpawnerCore.ValidVehicleTypes, target) then
+            local vehicle = Game.GetTargetingSystem():GetLookAtObject(player, false, false)
+            local vehiclePS = vehicle:GetVehiclePS()
+            
+            if vehiclePS:GetDoorInteractionState(1).value ~= "Available" then
+                vehiclePS:UnlockAllVehDoors()
+            end
+        end
     end
 end
 

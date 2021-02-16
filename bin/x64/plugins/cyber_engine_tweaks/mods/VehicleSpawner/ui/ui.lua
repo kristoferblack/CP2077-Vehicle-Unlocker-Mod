@@ -16,23 +16,24 @@ function VehicleSpawnerUI.Create()
     VehicleSpawnerUI.Theme.Start()
 
     ImGui.SetNextWindowPos(0, 500, ImGuiCond.FirstUseEver)
-    ImGui.SetNextWindowSize(350, 400, ImGuiCond.Appearing)
+    ImGui.SetNextWindowSize(350, 375, ImGuiCond.Always)
 
     if ImGui.Begin("Vehicle Spawner") then
 
         ImGui.SetWindowFontScale(1)
 
-        ImGui.TextWrapped("Search or choose a vehicle from the list below, then click Spawn button.")
-
+        VehicleSpawnerUI.Theme.DisplayText("Search or choose a vehicle from the list below, then click Spawn button.", VehicleSpawnerUI.Theme.TextWhite)
+        
         VehicleSpawnerUI.Theme.Spacing(3)
 
+        VehicleSpawnerUI.Theme.DisplayText("Search", VehicleSpawnerUI.Theme.CustomToggleOn)
 
-        VehicleSpawnerUI.Theme.DisplayLabel("Search Vehicles")
+        ImGui.SameLine()
         ImGui.PushItemWidth(-1)
         VehicleSpawnerUI.VehicleFilterText = ImGui.InputText("##VehicleListFilter", VehicleSpawnerUI.VehicleFilterText, 100)
-        local filterTextEsc = VehicleSpawnerUI.VehicleFilterText:gsub('([^%w])', '%%%1')
         ImGui.PopItemWidth()
-
+        
+        local filterTextEsc = VehicleSpawnerUI.VehicleFilterText:gsub('([^%w])', '%%%1')
 
         if ImGui.ListBoxHeader("##VehicleList", -1, 200) then
             for i, vehicle in ipairs(VehicleSpawnerUI.Data.Read()) do

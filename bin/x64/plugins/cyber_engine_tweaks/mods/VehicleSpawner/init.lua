@@ -46,7 +46,7 @@ function VehicleSpawner:new()
     end)
       
     registerForEvent("onUpdate", function(deltaTime)
-        VehicleSpawner.Spawner.Monitor(deltaTime)
+        VehicleSpawner.Spawner.Tick(deltaTime)
     end)
 
     registerForEvent("onOverlayOpen", function()

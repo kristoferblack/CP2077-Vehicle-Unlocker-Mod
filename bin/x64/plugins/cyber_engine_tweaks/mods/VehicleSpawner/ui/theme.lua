@@ -8,7 +8,7 @@ Theme = {
 	Border                              =           { 0.3 , 0.07, 0.08, 1    },
 	BorderShadow                        =           { 0   , 0   , 0   , 0    },
 	FrameBg                             =           { 0.57, 0.17, 0.16, 0.2  },
-	FrameBgHovered                      =           { 0.32, 0.09, 0.11, 0.7    },
+	FrameBgHovered                      =           { 0.32, 0.09, 0.11, 0.7  },
 	FrameBgActive                       =           { 0.1 , 0.05, 0.05, 1    },
 	FrameBgDisabled                     =           { 0.48, 0.39, 0.40, 1    },
 	FrameBgHoveredDisabled              =           { 0.48, 0.39, 0.40, 1    },
@@ -18,7 +18,7 @@ Theme = {
 	HeaderActive						=			{ 0.32, 0.09, 0.11, 1    },
 	TitleBg                             =           { 0.06, 0.04, 0.06, 0.8  },
 	TitleBgActive                       =           { 0.06, 0.04, 0.06, 0.8  },
-	TitleBgCollapsed                    =           { 0.06, 0.04, 0.06, 0.3  },
+	TitleBgCollapsed                    =           { 0.06, 0.04, 0.06, 0.5  },
 	MenuBarBg                           =           { 0   , 0   , 0   , 0    },
 	ScrollbarBg                         =           { 0.06, 0.04, 0.06, 0    },
 	ScrollbarGrab                       =           { 0.57, 0.17, 0.16, 1    },
@@ -100,11 +100,15 @@ function Theme.Start()
 	Theme.PushStyleColor(ImGuiCol.ButtonHovered,		    Theme.ButtonHovered)
 	Theme.PushStyleColor(ImGuiCol.ButtonActive,			    Theme.ButtonActive)
 	Theme.PushStyleColor(ImGuiCol.Separator,			    Theme.Separator)
+	Theme.PushStyleColor(ImGuiCol.ScrollbarBg,			    Theme.ScrollbarBg)
+	Theme.PushStyleColor(ImGuiCol.ScrollbarGrab,			Theme.ScrollbarGrab)
+	Theme.PushStyleColor(ImGuiCol.ScrollbarGrabHovered,		Theme.ScrollbarGrabHovered)
+	Theme.PushStyleColor(ImGuiCol.ScrollbarGrabActive,		Theme.ScrollbarGrabActive)
 
 	ImGui.PushStyleVar(ImGuiStyleVar.WindowPadding, 15, 15)
     ImGui.PushStyleVar(ImGuiStyleVar.WindowRounding, 0)
-    ImGui.PushStyleVar(ImGuiStyleVar.ScrollbarSize, 5)
-    ImGui.PushStyleVar(ImGuiStyleVar.WindowBorderSize, 2)
+    ImGui.PushStyleVar(ImGuiStyleVar.ScrollbarSize, 10)
+    ImGui.PushStyleVar(ImGuiStyleVar.WindowBorderSize, 1)
 end
 
 function Theme.End()
@@ -127,6 +131,12 @@ function Theme.DisplayLabelState(text, state)
 
 	ImGui.Text(text .. state:upper())
 	ImGui.Spacing()
+end
+
+function Theme.DisplayText(text, color)
+	Theme.PushStyleColor(ImGuiCol.Text, color)
+	ImGui.TextWrapped(text)
+	ImGui.PopStyleColor(1)
 end
 
 function Theme.Spacing(amount)
