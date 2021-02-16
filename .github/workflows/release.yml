@@ -14,10 +14,8 @@ jobs:
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Copy files
         run: |
-          mkdir -p ./build/release-main ./build/release
-          cp LICENSE ./build/release-main/CP2077-Vehicle-Unlocker-Mod
-          cp README.md ./build/release-main/CP2077-Vehicle-Unlocker-Mod
-          mv ./bin ./build/release-main/CP2077-Vehicle-Unlocker-Mod/
+          mkdir -p ./build/release-main/ ./build/release/
+          mv ./bin ./build/release-main/VehicleUnlocker/
 
       - name: Zip Release
         uses: TheDoctor0/zip-release@0.4.1
