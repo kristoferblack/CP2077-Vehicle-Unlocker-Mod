@@ -1,0 +1,32 @@
+name: Release
+on:
+  release:
+      types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Copy files
+        run: |
+          mkdir -p ./build/release-main/ ./build/release-demo/ ./build/release/
+          cp LICENSE ./CP2077-Vehicle-Unlocker-Mod/
+          mv ./CP2077-Vehicle-Unlocker-Mod/ ./build/release-main/CPStyling/
+
+      - name: Zip Release
+        uses: TheDoctor0/zip-release@0.4.1
+        with:
+          filename: ../release/VehicleUnlocker_${{ env.RELEASE_VERSION }}.zip
+          directory: ./build/release-main/
+
+      - name: Upload Artifacts
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          omitNameDuringUpdate: true
+          omitBodyDuringUpdate: true
+          artifacts: "./build/release/CPStyling_${{ env.RELEASE_VERSION }}.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
