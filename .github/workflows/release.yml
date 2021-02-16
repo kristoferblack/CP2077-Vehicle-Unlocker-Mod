@@ -17,7 +17,7 @@ jobs:
           mkdir -p ./build/release-main ./build/release
           cp LICENSE ./build/release-main/CP2077-Vehicle-Unlocker-Mod
           cp README.md ./build/release-main/CP2077-Vehicle-Unlocker-Mod
-          mv ./bin ./build/release-main/CP2077-Vehicle-Unlocker-Mod
+          mv ./bin ./build/release-main/CP2077-Vehicle-Unlocker-Mod/
 
       - name: Zip Release
         uses: TheDoctor0/zip-release@0.4.1
