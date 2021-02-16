@@ -12,9 +12,9 @@ jobs:
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Copy files
         run: |
-          mkdir -p ./build/release-main/ ./build/release-demo/ ./build/release/
+          mkdir -p ./build/release-main/ ./build/release/
           cp LICENSE ./CP2077-Vehicle-Unlocker-Mod/
-          mv ./CP2077-Vehicle-Unlocker-Mod/ ./build/release-main/CPStyling/
+          mv ./bin ./build/release-main/CP2077-Vehicle-Unlocker-Mod/
 
       - name: Zip Release
         uses: TheDoctor0/zip-release@0.4.1
