@@ -28,5 +28,5 @@ jobs:
           allowUpdates: true
           omitNameDuringUpdate: true
           omitBodyDuringUpdate: true
-          artifacts: "./build/release/CPStyling_${{ env.RELEASE_VERSION }}.zip"
+          artifacts: "./build/release/VehicleUnlocker_${{ env.RELEASE_VERSION }}.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
