@@ -34,7 +34,7 @@ function VehicleSpawnerUI.Create()
         ImGui.PopItemWidth()
 
 
-        if ImGui.ListBoxHeader("##VehicleList", -1, 200) then
+        if ImGui.BeginListBox("##VehicleList", -1, 200) then
             for i, vehicle in ipairs(VehicleSpawnerUI.Data.Read()) do
 
                 local prettyName = Game.GetLocalizedTextByKey(Game['TDB::GetLocKey;TweakDBID'](TweakDBID.new(vehicle ..'.displayName')))
@@ -57,7 +57,7 @@ function VehicleSpawnerUI.Create()
                 
             end
         end
-        ImGui.ListBoxFooter()
+        ImGui.EndListBox()
 
         if VehicleSpawnerUI.SelectedVehicle ~= "" then
             if ImGui.Button("Spawn Vehicle", -1, 25) then
@@ -75,32 +75,32 @@ function VehicleSpawnerUI.Create()
             end
         end
 
-        if ImGui.Button("Get Vehicle ID", -1, 25) then
-            print(TweakDB:GetRecord(TweakDBID.new(tostring(VehicleSpawnerUI.SelectedVehicle))):GetID())
-        end
+        -- if ImGui.Button("Get Vehicle ID", -1, 25) then
+        --     print(TweakDB:GetRecord(TweakDBID.new(tostring(VehicleSpawnerUI.SelectedVehicle))):GetID())
+        -- end
 
-        if ImGui.Button("Add Veh List", -1, 25) then
-            VehicleSpawnerUI.Spawner.Populate()
-        end
+        -- if ImGui.Button("Add Veh List", -1, 25) then
+        --     VehicleSpawnerUI.Spawner.Populate()
+        -- end
 
-        if ImGui.Button("Veh List", -1, 25) then
+        -- if ImGui.Button("Veh List", -1, 25) then
 
-            local vehList = TweakDB:GetFlat(TweakDBID.new("Vehicle.vehicle_list.list"))
+        --     local vehList = TweakDB:GetFlat(TweakDBID.new("Vehicle.vehicle_list.list"))
 
-            for i, veh in ipairs(vehList) do
-                print(i, veh)
-            end
-        end
+        --     for i, veh in ipairs(vehList) do
+        --         print(i, veh)
+        --     end
+        -- end
 
-        if ImGui.Button("Player Veh List", -1, 25) then
-            local vs = Game.GetVehicleSystem()
+        -- if ImGui.Button("Player Veh List", -1, 25) then
+        --     local vs = Game.GetVehicleSystem()
 
-            for i, veh in ipairs(vs:GetPlayerUnlockedVehicles()) do
-                print(i, veh.name)
-            end
+        --     for i, veh in ipairs(vs:GetPlayerUnlockedVehicles()) do
+        --         print(i, veh.name)
+        --     end
 
-            -- print(i, veh.name .. " - " .. veh.recordID .. " - " .. veh.vehicleType)
-        end
+        --     -- print(i, veh.name .. " - " .. veh.recordID .. " - " .. veh.vehicleType)
+        -- end
     end
     ImGui.End()
 

@@ -76,9 +76,9 @@ function VehicleSpawnerCore.Spawn(id)
 
 
     
-    vehObj = NewObject('vehicleGarageVehicleID')
+    -- vehObj = NewObject('vehicleGarageVehicleID')
 
-    print(Dump(vehObj, true))
+    -- print(Dump(vehObj, true))
     -- vehicleID = Game['Cast;TweakDBID;GarageVehicleID']
     -- vehicleID = vehObj['Resolve;string'](tostring(id))
     -- print(Dump(vs,false))
@@ -98,18 +98,18 @@ function VehicleSpawnerCore.Spawn(id)
     -- vs:TogglePlayerActiveVehicle(vehObj, "Car", false)
     -- vs:SpawnPlayerVehicle()
 
-	-- local player = Game.GetPlayer()
-	-- local worldForward = player:GetWorldForward()
-	-- local offset = Vector3.new(worldForward.x * VehicleSpawnerCore.SpawnDistance, worldForward.y * VehicleSpawnerCore.SpawnDistance, 1)
+	local player = Game.GetPlayer()
+	local worldForward = player:GetWorldForward()
+	local offset = Vector3.new(worldForward.x * VehicleSpawnerCore.SpawnDistance, worldForward.y * VehicleSpawnerCore.SpawnDistance, 1)
 
-	-- local spawnTransform = player:GetWorldTransform()
-	-- local spawnPosition = spawnTransform.Position:ToVector4(spawnTransform.Position)
+	local spawnTransform = player:GetWorldTransform()
+	local spawnPosition = spawnTransform.Position:ToVector4(spawnTransform.Position)
 
-    -- local vehicleTDBID = TweakDBID.new(id)
+    local vehicleTDBID = TweakDBID.new(id)
 
-	-- spawnTransform:SetPosition(spawnTransform, Vector4.new(spawnPosition.x + offset.x, spawnPosition.y + offset.y, spawnPosition.z + offset.z, spawnPosition.w))
+	spawnTransform:SetPosition(spawnTransform, Vector4.new(spawnPosition.x + offset.x, spawnPosition.y + offset.y, spawnPosition.z + offset.z, spawnPosition.w))
 	
-    -- Game.GetPreventionSpawnSystem():RequestSpawn(vehicleTDBID, -1, spawnTransform)
+    Game.GetPreventionSpawnSystem():RequestSpawn(vehicleTDBID, -1, spawnTransform)
 end
 
 function VehicleSpawnerCore.Despawn()
@@ -120,9 +120,9 @@ function VehicleSpawnerCore.Despawn()
     if target then
         if VehicleSpawnerCore.Util.IfArrayHasValue(VehicleSpawnerCore.ValidVehicleTypes, target) then
 
-            -- local targetTDBID = target:GetEntityID()
-            -- Game.GetPreventionSpawnSystem():RequestDespawn(targetTDBID)
-            target:Dispose()
+            local targetTDBID = target:GetEntityID()
+            Game.GetPreventionSpawnSystem():RequestDespawn(targetTDBID)
+            -- target:Dispose()
         end
     end
 end
