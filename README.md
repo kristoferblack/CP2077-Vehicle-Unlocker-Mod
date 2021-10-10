@@ -10,8 +10,8 @@ Lastly, some things you can spawn like av_heavy_cargo aren't despawnable since t
 
 ## Requirements
 
- - This mod requires at least version 1.10 of Cyber Engine Tweaks mod.
- - Version 1.12 of Cyberpunk 2077
+ - This mod requires at least version 1.17 of Cyber Engine Tweaks mod.
+ - Version 1.31 of Cyberpunk 2077
 
   
 
