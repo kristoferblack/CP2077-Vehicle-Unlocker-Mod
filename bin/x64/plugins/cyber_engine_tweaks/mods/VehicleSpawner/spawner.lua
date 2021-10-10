@@ -51,8 +51,6 @@ function VehicleSpawnerCore.Spawn(id)
 	local spawnPosition = spawnTransform.Position:ToVector4(spawnTransform.Position)
 
     local vehicleTDBID = TweakDBID.new(id)
-
-	spawnTransform:SetPosition(spawnTransform, Vector4.new(spawnPosition.x + offset.x, spawnPosition.y + offset.y, spawnPosition.z + offset.z, spawnPosition.w))
 	
     Game.GetPreventionSpawnSystem():RequestSpawn(vehicleTDBID, -1, spawnTransform)
 end
