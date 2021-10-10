@@ -48,7 +48,7 @@ function VehicleSpawnerCore.Spawn(id)
 	local offset = Vector3.new(worldForward.x * VehicleSpawnerCore.SpawnDistance, worldForward.y * VehicleSpawnerCore.SpawnDistance, 1)
 
 	local spawnTransform = player:GetWorldTransform()
-	local spawnPosition = spawnTransform.Position:ToVector4(spawnTransform.Position)
+	local spawnPosition = spawnTransform.Position:ToVector4()
 
     local vehicleTDBID = TweakDBID.new(id)
 	
